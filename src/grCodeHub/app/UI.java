@@ -34,12 +34,18 @@ public class UI {
     }
 
     //factory method design pattern
-    public Product createProduct(){
+    public Product createProduct() {
         String code, name;
         int quantity;
         float price;
+        String color;
+        String producer;
+        int productType;
 
         Scanner scanner = new Scanner(System.in);
+        System.out.println("1. for dairy 2. for color product ");
+        productType = scanner.nextInt();
+
         System.out.println("Give product Code");
         code = scanner.next();
         System.out.println("Give product Name");
@@ -49,9 +55,20 @@ public class UI {
         System.out.println("Give product Price");
         price = scanner.nextFloat();
 
-        Product product = new Product (code, name, price, quantity);
-
-        return product;
+        Product product;
+        switch (productType) {
+            case 1:
+                System.out.println("Give producer ");
+                producer = scanner.next();
+                product = new DairyProduct(code, name, price, quantity, producer);
+                return product;
+            case 2:
+                System.out.println("Give color ");
+                color = scanner.next();
+                product = new ColorProducts(code, name, price, quantity, color);
+                return product;
+            default: return null;
+        }
     }
 
     public void manageBasket(Basket basket){
